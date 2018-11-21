@@ -8,6 +8,7 @@ public class Point3D implements Geom_element, Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	private double _x,_y,_z;
+	private double EARTH_RADUIS=6371000 ;
 
 	public Point3D(double x,double y,double z) 
 	{
@@ -234,7 +235,29 @@ public final static int DOWN = 6, UP = 7;
 	}
 	/** transform from radians to angles */
 	public static double r2d(double a) { return Math.toDegrees(a);}
-	/** transform from radians to angles */
+	/** transform from angles to radians */
 	public static double d2r(double a) { return Math.toRadians(a);}
+	
+	
+	
+	public Point3D convertToGps() {	
+		
+		double lat =Math.sqrt(Math.pow(_x, 2)+Math.pow(_y, 2)+Math.pow(_z, 2));
+		double r=r2d(Math.asin(_z/EARTH_RADUIS));
+		double lon=r2d(Math.atan2(_y, _x));	
+		return new Point3D (r,lon,lat);
+	}
+	
+	public Point3D convertToCartesian() {
+		
+		double z = (EARTH_RADUIS+_z);
+		double x_lat = z*Math.cos(d2r(_x)) * Math.cos(d2r(_y));
+		double y_lon =z*Math.cos(d2r(_x)) * Math.sin(d2r(_y));
+		z *= Math.sin(d2r(_x));
+
+		return new Point3D(x_lat,y_lon,z);
+		
+		
+	}
 	////////////////////////////////////////////////////////////////////////////////
 }
