@@ -10,7 +10,7 @@ import Geom.Point3D;
  * @author Boaz Ben-Moshe
  *
  */
-public interface coords_converter {
+public interface Coords_converter {
 	/** computes a new point which is the gps point transformed by a 3D vector (in meters)*/
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter);
 	

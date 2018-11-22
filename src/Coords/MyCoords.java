@@ -2,7 +2,7 @@ package Coords;
 
 import Geom.Point3D;
 
-public class MyCoords implements coords_converter {
+public class MyCoords implements Coords_converter {
 
 	/**
 	 * computes a new point which is the gps point transformed by a 3D vector (in meters)
@@ -18,15 +18,34 @@ public class MyCoords implements coords_converter {
 		return new Point3D(x,y,z).convertToGps();
 	}
 
+	/**
+	 * computes the distance between 2 gps points
+	 * @param gps0 is the first gps point given
+	 * @param gps1 is the second gps point given
+	 * @return distance between the two points
+	 */
 	public double distance3d(Point3D gps0, Point3D gps1) {
 		Point3D gps0ConvertCartesi=gps0.convertToCartesian();
 		Point3D gps1ConvertCartesi=gps1.convertToCartesian();
 		return Math.abs(gps0ConvertCartesi.distance3D(gps1ConvertCartesi));
 	}
 
-	@Override
+	/**
+	 * 
+	 * computes the 3D vector (in meters) between two gps like points
+	 * @param gps0 is the first gps point given
+	 * @param gps1 is the second gps point given
+	 * @return vector of the two points that one is 
+	 */
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {
-		return null;
+		Point3D gps0ConvertCartesi=gps0.convertToCartesian();
+		Point3D gps1ConvertCartesi=gps1.convertToCartesian();
+		Point3D vector=null;
+		if(Math.abs(gps1ConvertCartesi.distance3D(0,0,0))>=Math.abs(gps0ConvertCartesi.distance3D(0,0,0)))
+			vector=new Point3D(gps1ConvertCartesi.x()-gps0ConvertCartesi.x(),gps1ConvertCartesi.y()-gps0ConvertCartesi.y(),gps1ConvertCartesi.z()-gps0ConvertCartesi.z());
+		else
+			vector=new Point3D(gps0ConvertCartesi.x()-gps1ConvertCartesi.x(),gps0ConvertCartesi.y()-gps1ConvertCartesi.y(),gps0ConvertCartesi.z()-gps1ConvertCartesi.z());
+		return vector;
 	}
 
 	@Override
