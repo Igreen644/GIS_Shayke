@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="GIS" project="GIS_Shayke" file="/GIS_Shayke/src/GIS" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="188" y="215"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="Threads" project="GIS_Shayke" file="/GIS_Shayke/src/Threads" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="350" y="215"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="Geom" project="GIS_Shayke" file="/GIS_Shayke/src/Geom" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="512" y="215"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="Coords" project="GIS_Shayke" file="/GIS_Shayke/src/Coords" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="674" y="215"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="GUI" project="GIS_Shayke" file="/GIS_Shayke/src/GUI" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="836" y="215"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="File_format" project="GIS_Shayke" file="/GIS_Shayke/src/File_format" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="998" y="215"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
