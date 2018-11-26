@@ -1,7 +1,5 @@
 package geom;
 
-import java.awt.Point;
-import java.awt.geom.Point2D;
 import java.io.Serializable;
 public class Point3D implements Geom_element, Serializable 
 {

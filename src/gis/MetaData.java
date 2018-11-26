@@ -1,0 +1,90 @@
+package gis;
+
+import geom.Point3D;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class MetaData implements Meta_data {
+
+	private String mac, ssid, authmode, channel, rssi, accuracyMeters, type;
+	private Date firstSeen;
+	private DateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm", Locale.ENGLISH);
+
+	public MetaData(String _mac, String _ssid, String _authmode, String _firstSeen, String _channel, String _rssi, String _accuracyMeters, String _type) throws ParseException {
+		mac = _mac;
+		ssid = _ssid;
+		authmode = _authmode;
+		channel = _channel;
+		rssi = _rssi;
+		accuracyMeters = _accuracyMeters;
+		type = _type;
+		firstSeen=format.parse(_firstSeen);
+	}
+
+	public Date getUTC() {
+		return firstSeen;
+	}
+
+	@Override
+	public Point3D get_Orientation() {
+		return null;
+	}
+	
+	/**********************Getters*****************/
+	public String getMac() {
+		return mac;
+	}
+	public String getSSID() {
+		return ssid;
+	}
+	public String getAuthmode() {
+		return authmode;
+	}
+	public Date getfirstSeen() {
+		return firstSeen;
+	}
+	public String getChannel() {
+		return channel;
+	}
+	public String getRssi() {
+		return rssi;
+	}
+	
+	public String getAccuracyMeters() {
+		return accuracyMeters;
+	}
+	public String getType() {
+		return type;
+	}
+	
+	/*******************************Setters*****************************/
+	public void setMac(String _Mac) {
+		mac=_Mac;
+	}
+	public void setSSID(String _SSID) {
+		ssid=_SSID;
+	}
+	public void setAuthmode(String _Authmode) {
+		authmode=_Authmode;
+	}
+	public void setfirstSeen(Date _firstSeen) {
+		firstSeen=_firstSeen;
+	}
+	public void setChannel(String _Channel) {
+		channel=_Channel;
+	}
+	public void setRssi(String _rssi) {
+		rssi=_rssi;
+	}
+	public void setAccuracyMeters(String _AccuracyMeters) {
+		accuracyMeters=_AccuracyMeters;
+	}
+	public void setType(String _Type) {
+		type=_Type;
+	}
+
+}
