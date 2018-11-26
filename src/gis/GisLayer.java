@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class GisLayer implements GIS_layer {
 
-	private Set<GIS_element> set;
+	public Set<GIS_element> set;
 	
 	@Override
 	public int size() {

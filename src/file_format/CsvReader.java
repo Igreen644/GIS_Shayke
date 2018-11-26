@@ -1,13 +1,14 @@
 package file_format;
 
-import gis.GisObject;
+import gis.GIS_element;
+import gis.GisElement;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CsvReader {
 
@@ -23,19 +24,19 @@ public class CsvReader {
 		cvsSplitBy = cvsSplitByChar;
 	}
 
-	public List<GisObject> read() {
+	public Set<GIS_element> read() {
 
-		List gisLayer=new ArrayList<GisObject>();
+		Set gisLayer = new HashSet<GisElement>();
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
 			int rowNum = 0;
 			while ((line = br.readLine()) != null) {
-				String[] element = line.split(cvsSplitBy);	
-				if(rowNum!=0)
+				String[] element = line.split(cvsSplitBy);
+				if (rowNum != 0)
 					gisLayer.add(element);
 				rowNum++;
 			}
-			
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -52,11 +53,11 @@ public class CsvReader {
 		return gisLayer;
 
 	}
-public static void main(String[] args) {
-	String s="/wifi.csv";
-	CsvReader csv=new CsvReader();
-	csv.init(s,"'");
-	csv.read();
+
+	public static void main(String[] args) {
+		String s = "/wifi.csv";
+		CsvReader csv = new CsvReader();
+		csv.init(s, "'");
+		csv.read();
 	}
 }
-
