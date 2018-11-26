@@ -30,12 +30,12 @@ public class GisLayer implements GIS_layer {
 
 	@Override
 	public Object[] toArray() {
-		return null;
+		return set.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		return null;
+		return set.toArray(a);
 	}
 
 	@Override
