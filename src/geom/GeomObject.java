@@ -1,6 +1,4 @@
-package gis;
-
-import geom.Point3D;
+package geom;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,13 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class GisObject {
+public class GeomObject implements Geom_element {
+
 	private String Mac, SSID, Authmode, Channel, rssi,AccuracyMeters, Type;
 	private Point3D point;
 	private Date firstSeen;
 	DateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm", Locale.ENGLISH);
+	
 
-	public GisObject(String _Mac, String _SSID, String _Authmode, String _firstSeen, String _Channel, String _rssi,
+	public GeomObject(String _Mac, String _SSID, String _Authmode, String _firstSeen, String _Channel, String _rssi,
 			String _CurrentLatitude, String _CurrentLongitude, String _AltitudeMeters, String _AccuracyMeters,
 			String _Type) throws ParseException {
 		Mac=_Mac;
@@ -27,7 +27,7 @@ public class GisObject {
 		AccuracyMeters=_AccuracyMeters;
 		Type=_Type;
 	}
-	public GisObject(String[]s) throws ParseException {
+	public GeomObject(String[]s) throws ParseException {
 		Mac=s[0];
 		SSID=s[1];
 		Authmode=s[2];
@@ -102,5 +102,15 @@ public class GisObject {
 	}
 	public void setType(String _Type) {
 		Type=_Type;
+	}
+	
+	@Override
+	public double distance3D(Point3D p) {
+		return point.distance3D(p);
+	}
+	
+	@Override
+	public double distance2D(Point3D p) {
+		return point.distance2D(p);
 	}
 }
