@@ -84,6 +84,9 @@ public class Point3D implements Geom_element, Serializable
     
     public String toFile1()  {return "Point3D "+_x+" "+_y+" "+_z;}
 
+    public String getCoord(){
+    	return _y+","+_z;
+    }
     ////////////////////////////////////////////////////////////////////////////////////////
 
 public final static int ONSEGMENT = 0,  LEFT = 1, RIGHT = 2, INFRONTOFA = 3, BEHINDB = 4, ERROR = 5;

@@ -1,9 +1,13 @@
 package file_format;
 
+import gis.GisObject;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CsvReader {
 
@@ -13,26 +17,25 @@ public class CsvReader {
 	private String line;
 
 	public void init(String csvFilePath, String cvsSplitByChar) {
-		csvFile = csvFilePath;// "/Users/mkyong/csv/country.csv";
+		csvFile = csvFilePath;
 		br = null;
 		line = "";
-		cvsSplitBy = cvsSplitByChar; // ",";
+		cvsSplitBy = cvsSplitByChar;
 	}
 
-	public void read() {
+	public List<GisObject> read() {
 
+		List gisLayer=new ArrayList<GisObject>();
 		try {
-
 			br = new BufferedReader(new FileReader(csvFile));
+			int rowNum = 0;
 			while ((line = br.readLine()) != null) {
-
-				// use comma as separator
-				String[] country = line.split(cvsSplitBy);
-
-				//System.out.println("Country [code= " + country[4] + " , name=" + country[5] + "]");
-
+				String[] element = line.split(cvsSplitBy);	
+				if(rowNum!=0)
+					gisLayer.add(element);
+				rowNum++;
 			}
-
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -46,10 +49,11 @@ public class CsvReader {
 				}
 			}
 		}
+		return gisLayer;
 
 	}
 public static void main(String[] args) {
-	String s="/Users/owner/git/wifi.csv";
+	String s="/wifi.csv";
 	CsvReader csv=new CsvReader();
 	csv.init(s,"'");
 	csv.read();

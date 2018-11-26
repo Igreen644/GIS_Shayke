@@ -1,37 +1,40 @@
 package gis;
 
+import geom.Point3D;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class GisObject {
 	private String Mac, SSID, Authmode, Channel, rssi,AccuracyMeters, Type;
-	private int CurrentLatitude, CurrentLongitude,AltitudeMeters;
+	private Point3D point;
 	private Date firstSeen;
+	DateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm", Locale.ENGLISH);
 
 	public GisObject(String _Mac, String _SSID, String _Authmode, String _firstSeen, String _Channel, String _rssi,
 			String _CurrentLatitude, String _CurrentLongitude, String _AltitudeMeters, String _AccuracyMeters,
-			String _Type) {
+			String _Type) throws ParseException {
 		Mac=_Mac;
 		SSID=_SSID;
 		Authmode=_Authmode;
-		firstSeen=_firstSeen;
+		firstSeen=format.parse(_firstSeen);
 		Channel=_Channel;
 		rssi=_rssi;
-		CurrentLatitude=_CurrentLatitude;
-		CurrentLongitude=_CurrentLongitude;
-		AltitudeMeters=_AltitudeMeters;
+		point=new Point3D(Double.parseDouble(_CurrentLatitude),Double.parseDouble(_CurrentLongitude),Double.parseDouble(_AltitudeMeters));
 		AccuracyMeters=_AccuracyMeters;
 		Type=_Type;
 	}
-	public GisObject(String[]s) {
+	public GisObject(String[]s) throws ParseException {
 		Mac=s[0];
 		SSID=s[1];
 		Authmode=s[2];
-		firstSeen=s[3];
+		firstSeen=format.parse(s[3]);
 		Channel=s[4];
 		rssi=s[5];
-		CurrentLatitude=s[6];
-		CurrentLongitude=s[7];
-		AltitudeMeters=s[8];
+		point=new Point3D(Double.parseDouble(s[6]),Double.parseDouble(s[7]),Double.parseDouble(s[8]));
 		AccuracyMeters=s[9];
 		Type=s[10];
 
@@ -47,7 +50,7 @@ public class GisObject {
 	public String getAuthmode() {
 		return Authmode;
 	}
-	public String getfirstSeen() {
+	public Date getfirstSeen() {
 		return firstSeen;
 	}
 	public String getChannel() {
@@ -56,20 +59,23 @@ public class GisObject {
 	public String getRssi() {
 		return rssi;
 	}
-	public String getCurrentLatitude() {
-		return CurrentLatitude;
+	public double getCurrentLatitude() {
+		return point.y();
 	}
-	public String getCurrentLongitude() {
-		return CurrentLongitude;
+	public double getCurrentLongitude() {
+		return point.z();
 	}
-	public String getAltitudeMeters() {
-		return AltitudeMeters;
+	public double getAltitudeMeters() {
+		return point.x();
 	}
 	public String getAccuracyMeters() {
 		return AccuracyMeters;
 	}
 	public String getType() {
 		return Type;
+	}
+	public Point3D getPoint(){
+		return point;
 	}
 	
 	/*******************************Setters*****************************/
@@ -82,7 +88,7 @@ public class GisObject {
 	public void setAuthmode(String _Authmode) {
 		Authmode=_Authmode;
 	}
-	public void setfirstSeen(String _firstSeen) {
+	public void setfirstSeen(Date _firstSeen) {
 		firstSeen=_firstSeen;
 	}
 	public void setChannel(String _Channel) {
@@ -90,15 +96,6 @@ public class GisObject {
 	}
 	public void setRssi(String _rssi) {
 		rssi=_rssi;
-	}
-	public void setCurrentLatitude(String _CurrentLatitude) {
-		CurrentLatitude=_CurrentLatitude;
-	}
-	public void setCurrentLongitude(String _CurrentLongitude) {
-		CurrentLongitude=_CurrentLongitude;
-	}
-	public void setAltitudeMeters(String _AltitudeMeters) {
-		AltitudeMeters=_AltitudeMeters;
 	}
 	public void setAccuracyMeters(String _AccuracyMeters) {
 		AccuracyMeters=_AccuracyMeters;
