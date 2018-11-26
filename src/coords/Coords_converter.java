@@ -1,6 +1,6 @@
 package coords;
 
-import Geom.Point3D;
+import geom.Point3D;
 
 /**
  * This interface represents a basic coordinate system converter, including:

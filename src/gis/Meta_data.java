@@ -1,6 +1,6 @@
-package GIS;
+package gis;
 
-import Geom.Point3D;
+import geom.Point3D;
 
 public interface Meta_data {
 	/** returns the Universal Time Clock associated with this data; */

@@ -1,4 +1,4 @@
-package Threads;
+package threads;
 /**
  * This demo class presents a multi-threaded sorting algorithm - 
  * which is 30-40% faster than a single threaded sorting - 

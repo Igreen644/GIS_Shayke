@@ -1,4 +1,4 @@
-package Threads;
+package threads;
 //some change 
 public class MyThread extends Thread {
 	private String _name;

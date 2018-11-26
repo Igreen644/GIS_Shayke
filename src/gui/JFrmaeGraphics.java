@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 import java.awt.Color;
 /**
  * Code taken from: https://javatutorial.net/display-text-and-graphics-java-jframe

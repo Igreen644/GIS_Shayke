@@ -1,7 +1,7 @@
-package GIS;
+package gis;
 
-import Geom.Geom_element;
-import Geom.Point3D;
+import geom.Geom_element;
+import geom.Point3D;
 
 /**
  * This interface represents a GIS element with geometric representation and meta data such as:

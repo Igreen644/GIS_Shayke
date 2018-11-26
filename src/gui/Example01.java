@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 //Comment out the following package statement to compile separately.
 
 import java.awt.Color;

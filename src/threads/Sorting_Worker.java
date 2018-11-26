@@ -1,4 +1,4 @@
-package Threads;
+package threads;
 public class Sorting_Worker extends Thread {
     private int[] internal;
     public int[] getInternal() {
