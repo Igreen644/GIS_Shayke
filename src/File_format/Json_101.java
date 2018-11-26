@@ -1,4 +1,4 @@
-package File_format;
+package file_format;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

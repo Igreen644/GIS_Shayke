@@ -1,4 +1,4 @@
-package Coords;
+package coords;
 
 import Geom.Point3D;
 
@@ -48,14 +48,43 @@ public class MyCoords implements Coords_converter {
 		return vector;
 	}
 
-	@Override
+	/** computes the polar representation of the 3D vector be gps0-->gps1 
+	 * Note: this method should return an azimuth (aka yaw), elevation (pitch), and distance*/
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
-		return null;
+
+		double[] ans = new double[3];
+
+		//calculate azimuth
+		double x0 = Point3D.r2d(gps0.x());
+	    double x1 = Point3D.r2d(gps1.x());
+	    double dY=Point3D.r2d(gps1.y()- gps0.y());
+
+
+	    double x = Math.sin(dY) * Math.cos(x1);
+	    double y = Math.cos(x0) * Math.sin(x1) - Math.sin(x0)*Math.cos(x1)*Math.cos(dY);
+	    double azimuth = Math.atan2(x,y);
+	    
+	    if(Point3D.r2d(azimuth)<0)
+	    	azimuth = 360+Math.toDegrees(azimuth);
+	    else
+	    	azimuth = Math.toDegrees(azimuth);
+
+	    double elevation= Point3D.r2d(Math.acos( (gps1.z() - gps0.z())/distance3d(gps0, gps1)));
+	    
+	    ans[0]=azimuth;
+	    ans[1]=elevation;
+	    ans[2]=distance3d(gps0, gps1);
+	    
+	    return ans;
 	}
 
-	@Override
+	/**
+	 * return true if this point is a valid lat, lon , lat coordinate: [-180,+180],[-90,+90],[-450, +inf]
+	 * @param p
+	 * @return true if this point is a valid point
+	 */
 	public boolean isValid_GPS_Point(Point3D p) {
-		return false;
+		return (p.x()>=(-180)&&p.x()<=180)&&(p.y()>=(-90)&&p.x()<=90)&&(p.z()>=(-450));
 	}
 	
 

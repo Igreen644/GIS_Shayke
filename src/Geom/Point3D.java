@@ -1,5 +1,7 @@
 package Geom;
 
+import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.io.Serializable;
 public class Point3D implements Geom_element, Serializable 
 {
@@ -242,22 +244,26 @@ public final static int DOWN = 6, UP = 7;
 	
 	public Point3D convertToGps() {	
 		
-		double lat =Math.sqrt(Math.pow(_x, 2)+Math.pow(_y, 2)+Math.pow(_z, 2));
-		double r=r2d(Math.asin(_z/EARTH_RADUIS));
-		double lon=r2d(Math.atan2(_y, _x));	
-		return new Point3D (r,lon,lat);
+		double r=Math.sqrt(Math.pow(_x, 2)+Math.pow(_y, 2)+Math.pow(_z, 2));
+		double lon =r2d(Math.atan2(Math.sqrt(Math.pow(_x, 2)+Math.pow(_y, 2)),_z));
+		double lat=r2d(Math.atan2(_y, _x));	
+		return new Point3D (r,lat,lon);
 	}
 	
 	public Point3D convertToCartesian() {
 		
-		double z = (EARTH_RADUIS+_z);
-		double x_lat = z*Math.cos(d2r(_x)) * Math.cos(d2r(_y));
-		double y_lon =z*Math.cos(d2r(_x)) * Math.sin(d2r(_y));
-		z *= Math.sin(d2r(_x));
-
+		double x_lat=_x*Math.sin(_z)*Math.cos(_y);
+		double y_lon=_x*Math.sin(_z)*Math.sin(_y);
+		double z=_x*Math.cos(_z);
 		return new Point3D(x_lat,y_lon,z);
-		
-		
 	}
+	
 	////////////////////////////////////////////////////////////////////////////////
+	
+	public static void main(String[] args) {
+		Point3D p=new Point3D(5,60,30);
+		System.out.println(p.convertToCartesian());
+		Point3D p2=new Point3D(3,4,5);
+		System.out.println(p2.convertToGps());
+	}
 }

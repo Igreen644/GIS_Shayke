@@ -1,4 +1,4 @@
-package Coords;
+package coords;
 
 import Geom.Point3D;
 
@@ -7,7 +7,7 @@ import Geom.Point3D;
  * 1. The 3D vector between two lat,lon, alt points 
  * 2. Adding a 3D vector in meters to a global point.
  * 3. convert a 3D vector from meters to polar coordinates
- * @author Boaz Ben-Moshe
+ * @author Shayke Shok and Itay Grinblat
  *
  */
 public interface Coords_converter {
@@ -25,7 +25,7 @@ public interface Coords_converter {
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1);
 	
 	/**
-	 * return true iff this point is a valid lat, lon , lat coordinate: [-180,+180],[-90,+90],[-450, +inf]
+	 * return true if this point is a valid lat, lon , lat coordinate: [-180,+180],[-90,+90],[-450, +inf]
 	 * @param p
 	 * @return
 	 */
