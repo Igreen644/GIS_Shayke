@@ -1,6 +1,6 @@
 package file_format;
 
-import gis.GisObject;
+import gis.GisElement;
 
 import java.io.File;
 import java.util.List;
@@ -43,7 +43,7 @@ public class KmlWriter {
 	 * 
 	 * @param mark
 	 */
-	public static void addMarksFromList(List<List<GisObject>> list) {
+	public static void addMarksFromList(List<List<GisElement>> list) {
 		if (list.isEmpty())
 			return;
 
