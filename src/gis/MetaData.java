@@ -24,12 +24,17 @@ public class MetaData implements Meta_data {
 		type = _type;
 		firstSeen=format.parse(_firstSeen);
 	}
-
-	public Date getUTC() {
-		return firstSeen;
+	
+	/** 
+	 * @return date that is the Universal Time Clock associated with this data in milliseconds
+	 */
+	public long getUTC() {
+		return firstSeen.getTime();
 	}
 
-	@Override
+	/**
+	 * @return the orientation: yaw, pitch and roll associated with this data
+	 */
 	public Point3D get_Orientation() {
 		return null;
 	}

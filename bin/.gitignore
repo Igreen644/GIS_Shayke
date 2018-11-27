@@ -1,13 +1,7 @@
-/Coords/
-/File_format/
-/GIS/
-/GUI/
-/Geom/
-/Threads/
+/algorithms/
 /coords/
+/file_format/
 /geom/
 /gis/
 /gui/
 /threads/
-/file_format/
-/algorithms/
