@@ -1,6 +1,7 @@
 package file_format;
 
 import gis.GIS_element;
+import gis.GIS_layer;
 import gis.GisElement;
 
 import java.io.BufferedReader;
@@ -16,6 +17,7 @@ public class CsvReader {
 	private String cvsSplitBy;
 	private BufferedReader br;
 	private String line;
+	private GIS_layer layer;
 
 	public void init(String csvFilePath, String cvsSplitByChar) {
 		csvFile = csvFilePath;

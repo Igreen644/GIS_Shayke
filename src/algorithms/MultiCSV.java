@@ -2,8 +2,10 @@ package algorithms;
 
 import java.io.File;
 import file_format.CsvReader;
+import gis.GIS_project;
 
 public class MultiCSV {
+public GIS_project project;
 
 	public static void listFilesForFolder(final File folder) {
 		CsvReader csvReader = new CsvReader();
