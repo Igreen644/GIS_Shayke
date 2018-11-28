@@ -1,9 +1,6 @@
 package file_format;
 
-import gis.GisElement;
-
 import java.io.File;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,15 +13,20 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import gis.GIS_element;
+import gis.GIS_layer;
+import gis.GIS_project;
+import gis.GisElement;
+
 public class KmlWriter {
 
-	private static Document doc;
-	private static Element root;
+	private Document doc;
+	private Element root;
 
 	/**
 	 * Create a KML object.
 	 */
-	public static void kml() {
+	public void kml() {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
@@ -43,46 +45,45 @@ public class KmlWriter {
 	 * 
 	 * @param mark
 	 */
-	public static void addMarksFromList(List<List<GisElement>> list) {
-		if (list.isEmpty())
+	public void addMarksFromList(GIS_project projectCSV) {
+		if (projectCSV.isEmpty())
 			return;
-
-		for (int i = 0; i < list.size(); i++) {
-			if (!list.get(i).isEmpty()) {
-				for (int j = 0; j < list.get(i).size(); j++) {
+		for (GIS_layer gis_layer : projectCSV) {
+			if (!gis_layer.isEmpty()) {
+				for (GIS_element gis_element : gis_layer) {
 
 					Element placemark = doc.createElement("Placemark");
 					root.appendChild(placemark);
 
 					Element name = doc.createElement("name");
-					name.appendChild(doc.createTextNode(list.get(i).get(j).getSSID()));
+					name.appendChild(doc.createTextNode(((GisElement) gis_element).getSSID()));
 					placemark.appendChild(name);
 
 					// SimpleDateFormat sdf = new
 					// SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
 					Element desc = doc.createElement("description");
-					desc.appendChild(doc.createTextNode("SSID: " + list.get(i).get(j).getSSID() + "\n" + "MAC: " + list.get(i).get(j).getMac() + "\n" + "Signal: " + list.get(i).get(j).getRssi()
-							+ "\n" + "Time: " + list.get(i).get(j).getfirstSeen().toString() + "\n" + "Latitude: " + list.get(i).get(j).getCurrentLatitude() + "\n" + "Longitude: "
-							+ list.get(i).get(j).getCurrentLongitude() + "\n" + "Altitude: " + list.get(i).get(j).getAltitudeMeters()));
+					desc.appendChild(doc.createTextNode("SSID: " + ((GisElement) gis_element).getSSID() + "\n" + "MAC: " + ((GisElement) gis_element).getMac() + "\n" + "Signal: " + ((GisElement) gis_element).getRssi()
+							+ "\n" + "Time: " + ((GisElement) gis_element).getfirstSeen().toString() + "\n" + "Latitude: " + ((GisElement) gis_element).getCurrentLatitude() + "\n" + "Longitude: "
+							+ ((GisElement) gis_element).getCurrentLongitude() + "\n" + "Altitude: " + ((GisElement) gis_element).getAltitudeMeters()));
 					placemark.appendChild(desc);
 
 					Element point = doc.createElement("Point");
 					placemark.appendChild(point);
 
-					if (list.get(i).get(j).getAltitudeMeters() > 0) {
+					if (((GisElement) gis_element).getAltitudeMeters() > 0) {
 						Element altitudeMode = doc.createElement("altitudeMode");
 						altitudeMode.appendChild(doc.createTextNode("absolute"));
 						point.appendChild(altitudeMode);
 					}
 
 					Element coords = doc.createElement("coordinates");
-					coords.appendChild(doc.createTextNode(list.get(i).get(j).getPoint().getCoord()));
+					coords.appendChild(doc.createTextNode(((GisElement) gis_element).getPoint().getCoord()));
 					point.appendChild(coords);
 
 					Element TimeStamp = doc.createElement("TimeStamp");
 					Element when = doc.createElement("when");
 					TimeStamp.appendChild(when);
-					String time = list.get(i).get(j).getfirstSeen() + "Z";
+					String time = ((GisElement) gis_element).getfirstSeen() + "Z";
 					when.appendChild(doc.createTextNode(time));
 					TimeStamp.appendChild(when);
 					placemark.appendChild(TimeStamp);
@@ -97,7 +98,7 @@ public class KmlWriter {
 	 * @param file
 	 * @return boolean true if file written
 	 */
-	public static boolean writeFile(File file) {
+	public boolean writeFile(File file) {
 		try {
 			TransformerFactory factory = TransformerFactory.newInstance();
 			Transformer transformer = factory.newTransformer();
@@ -115,12 +116,7 @@ public class KmlWriter {
 	}
 
 	public static String addFilteringArea(double[] rectTop, double[] rectBot, String kml) {// adds
-																							// the
-																							// rectangle
-																							// of
-																							// the
-																							// filtering
-																							// area
+																							// the																					// area
 		// rectTop = {xTopLeft, yTopLeft, xTopRight, yTopRight}
 		// rectBot = {xBottomLeft, yBottomLeft, xBottomRight, yBottomRight}
 		// <altitudeMode>relativeToGround</altitudeMode>

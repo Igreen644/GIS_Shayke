@@ -1,41 +1,40 @@
 package file_format;
 
-import gis.GIS_element;
-import gis.GIS_layer;
-import gis.GisElement;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.text.ParseException;
+
+import gis.GIS_layer;
+import gis.GisElement;
 
 public class CsvReader {
 
 	private String csvFile;
-	private String cvsSplitBy;
+	private String csvSplitBy;
 	private BufferedReader br;
 	private String line;
-	private GIS_layer layer;
+	private GIS_layer gisLayer;
 
-	public void init(String csvFilePath, String cvsSplitByChar) {
+	public void init(String csvFilePath, String csvSplitByChar) {
 		csvFile = csvFilePath;
 		br = null;
 		line = "";
-		cvsSplitBy = cvsSplitByChar;
+		csvSplitBy = csvSplitByChar;
+		gisLayer=null;
 	}
 
-	public Set<GIS_element> read() {
+	public GIS_layer read() throws ParseException {
 
-		Set gisLayer = new HashSet<GisElement>();
+
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
 			int rowNum = 0;
 			while ((line = br.readLine()) != null) {
-				String[] element = line.split(cvsSplitBy);
-				if (rowNum != 0)
-					gisLayer.add(element);
+				String[] element = line.split(",");
+				if (rowNum > 1)
+					gisLayer.add(new GisElement(element));
 				rowNum++;
 			}
 
@@ -56,7 +55,7 @@ public class CsvReader {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		String s = "/wifi.csv";
 		CsvReader csv = new CsvReader();
 		csv.init(s, "'");

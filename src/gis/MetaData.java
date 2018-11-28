@@ -12,7 +12,7 @@ public class MetaData implements Meta_data {
 
 	private String mac, ssid, authmode, channel, rssi, accuracyMeters, type;
 	private Date firstSeen;
-	private DateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm", Locale.ENGLISH);
+	private DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH);
 
 	public MetaData(String _mac, String _ssid, String _authmode, String _firstSeen, String _channel, String _rssi, String _accuracyMeters, String _type) throws ParseException {
 		mac = _mac;
@@ -31,7 +31,14 @@ public class MetaData implements Meta_data {
 	public long getUTC() {
 		return firstSeen.getTime();
 	}
-
+	/**
+	 *  @return str a String representing this data 
+	 */
+	public String toString() {
+		String str ="META-DATA:  Mac: "+mac+", SSID: "+ssid+", authmode: "+authmode+", channel: "+channel+", rssi: "+rssi+", accuracyMeters: "+accuracyMeters+", type: "+type+", firstSeen: "+firstSeen;
+		return str;
+		
+	}
 	/**
 	 * @return the orientation: yaw, pitch and roll associated with this data
 	 */
@@ -91,5 +98,4 @@ public class MetaData implements Meta_data {
 	public void setType(String _Type) {
 		type=_Type;
 	}
-
 }

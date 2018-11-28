@@ -1,12 +1,16 @@
 package gis;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 public class GisProject implements GIS_project {
-	
 	private Set<GIS_layer> set;
+	
+	public GisProject() {
+		set=new HashSet<GIS_layer>();
+	}
 	
 	@Override
 	public int size() {

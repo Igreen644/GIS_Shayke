@@ -1,12 +1,16 @@
 package gis;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 public class GisLayer implements GIS_layer {
-
 	public Set<GIS_element> set;
+	
+	public GisLayer() {
+		set=new HashSet<GIS_element>();
+	}
 	
 	@Override
 	public int size() {
