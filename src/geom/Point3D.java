@@ -8,7 +8,6 @@ public class Point3D implements Geom_element, Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	private double _x,_y,_z;
-	private double EARTH_RADUIS=6371000 ;
 
 	public Point3D(double x,double y,double z) 
 	{
@@ -78,7 +77,7 @@ public class Point3D implements Geom_element, Serializable
 	  public boolean equalsXY (Point3D p)
 	    {return p._x == _x && p._y == _y;}
 	    
-    public String toFile()  {return _x+","+_y+","+_z;}
+    public String toFile()  {return _y+","+_x+","+_z;}
     
     public String toFile1()  {return "Point3D "+_x+" "+_y+" "+_z;}
 

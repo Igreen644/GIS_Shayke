@@ -8,6 +8,7 @@ import java.text.ParseException;
 
 import gis.GIS_layer;
 import gis.GisElement;
+import gis.GisLayer;
 
 public class CsvReader {
 
@@ -22,7 +23,7 @@ public class CsvReader {
 		br = null;
 		line = "";
 		csvSplitBy = csvSplitByChar;
-		gisLayer=null;
+		gisLayer=new GisLayer();
 	}
 
 	public GIS_layer read() throws ParseException {

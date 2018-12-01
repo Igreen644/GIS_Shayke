@@ -27,7 +27,7 @@ public class Csv2Kml {
 		}
 		
 		KmlWriter kmlWriter=new KmlWriter();
-		File file=new File(System.getProperty("user.dir"));
+		File file=new File(System.getProperty("user.dir")+"\\file.kml");
 		kmlWriter.kml();
 		kmlWriter.addMarksFromList(gisProject);
 		kmlWriter.writeFile(file);

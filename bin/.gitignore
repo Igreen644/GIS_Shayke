@@ -1,9 +1,6 @@
-/Test_MyCoords.class
-/algorithms/
-/coords/
-/file_format/
-/geom/
-/gis/
 /gui/
-/threads/
 /test/
+/threads/
+/file_format/
+/gis/
+/geom/

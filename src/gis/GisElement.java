@@ -49,15 +49,15 @@ public class GisElement implements GIS_element {
 	}
 
 	public double getCurrentLatitude() {
-		return point.y();
+		return point.x();
 	}
 
 	public double getCurrentLongitude() {
-		return point.z();
+		return point.y();
 	}
 
 	public double getAltitudeMeters() {
-		return point.x();
+		return point.z();
 	}
 
 	public String getAccuracyMeters() {

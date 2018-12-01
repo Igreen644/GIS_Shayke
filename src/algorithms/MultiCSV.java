@@ -6,12 +6,13 @@ import java.text.ParseException;
 import file_format.CsvReader;
 import gis.GIS_layer;
 import gis.GIS_project;
+import gis.GisProject;
 
 public class MultiCSV {
 	public static GIS_project project;
 
 	public MultiCSV() { 
-		project = null;
+		project = new GisProject();
 	}
 
 	public static GIS_project listFilesForFolder(final File folder) throws ParseException {
