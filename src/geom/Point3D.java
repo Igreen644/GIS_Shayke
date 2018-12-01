@@ -1,11 +1,12 @@
 package geom;
 
 import java.io.Serializable;
+
+/**
+ * This class represents a 3D point in space.
+ */
 public class Point3D implements Geom_element, Serializable 
 {
-	/**
-	 * This class represents a 3D point in space.
-	 */
 	private static final long serialVersionUID = 1L;
 	private double _x,_y,_z;
 
@@ -22,8 +23,11 @@ public class Point3D implements Geom_element, Serializable
 		_y=p.y();
 		_z=p.z();
 	}
-	public Point3D(double x,double y) 
-	{this(x,y,0);}
+	
+	public Point3D(double x,double y) {
+		this(x,y,0);
+	}
+	
 	public Point3D(String s) {
 		String[] a = s.split(",");
 		_x = Double.parseDouble(a[0]);
@@ -35,30 +39,56 @@ public class Point3D implements Geom_element, Serializable
 	///////////////////////////////////////////////////////////////////////////
 
 	
-	public double x() {return _x;}
-	public double y() {return _y;}
-	public double z() {return _z;}
-	public int ix() {return (int)_x;}
-	public int iy() {return (int)_y;}
-	public int iz() {return (int)_z;}
+	public double x() {
+		return _x;
+	}
+	
+	public double y() {
+		return _y;
+	}
+	
+	public double z() {
+		return _z;
+	}
+	
+	public int ix() {
+		return (int)_x;
+	}
+	
+	public int iy() {
+		return (int)_y;
+	}
+	
+	public int iz() {
+		return (int)_z;
+	}
+	
 		
-	public void add(Point3D p) { add(p._x,p._y,p._z);}
+	public void add(Point3D p) { 
+		add(p._x,p._y,p._z);
+	}
+	
 	public void add(double dx, double dy, double dz) {
 			_x+=dx;_y+=dy;_z+=dz;
-		}
-	public void add(double x, double y){this.add(x,y,0);}
+	}
+	
+	public void add(double x, double y){
+		this.add(x,y,0);
+	}
 
-	public String toString() 
-	{
+	public String toString() {
 		return ""+_x+","+_y+","+_z;
 	}
+	
 	public double distance2D(Point3D p2) { 
 		return this.distance3D(p2.x(), p2.y(), this.z());
 	}
+	
 	public double distance3D(Point3D p2) {
-		return this.distance3D(p2.x(), p2.y(), p2.z());}
-	public double distance3D(double x, double y , double z)
-	{
+		return this.distance3D(p2.x(), p2.y(), p2.z());
+	}
+	
+	public double distance3D(double x, double y , double z){
 		double dx = _x-x;
 		double dy = _y-y;
 		double dz = _z-z;
@@ -66,20 +96,25 @@ public class Point3D implements Geom_element, Serializable
 		return Math.sqrt(t);
 	}
 
-	public boolean equals(Point3D p2)
-	{
+	public boolean equals(Point3D p2){
 		return ( (_x==p2._x) && (_y==p2._y) && (_z==p2._z) );
 	}
-	public boolean close2equals(Point3D p2, double dist)
-	{
+	
+	public boolean close2equals(Point3D p2, double dist){
 		return ( this.distance3D(p2)< dist );
 	}
-	  public boolean equalsXY (Point3D p)
-	    {return p._x == _x && p._y == _y;}
+	
+	public boolean equalsXY (Point3D p){
+		return p._x == _x && p._y == _y;
+	}
 	    
-    public String toFile()  {return _y+","+_x+","+_z;}
+    public String toFile()  {
+    	return _y+","+_x+","+_z;
+    }
     
-    public String toFile1()  {return "Point3D "+_x+" "+_y+" "+_z;}
+    public String toFile1()  {
+    	return "Point3D "+_x+" "+_y+" "+_z;
+    }
 
     public String getCoord(){
     	return _y+","+_z;
@@ -89,7 +124,7 @@ public class Point3D implements Geom_element, Serializable
 public final static int ONSEGMENT = 0,  LEFT = 1, RIGHT = 2, INFRONTOFA = 3, BEHINDB = 4, ERROR = 5;
 public final static int DOWN = 6, UP = 7;
 
-/** return up iff this point is above the SEGMENT (not the line) */
+/** return up if this point is above the SEGMENT (not the line) */
     public int pointLineTest2(Point3D a, Point3D b) {
     	int flag = this.pointLineTest(a,b);
     	if(a._x < b._x ) {
@@ -236,22 +271,22 @@ public final static int DOWN = 6, UP = 7;
 		return Math.toDegrees(ans);
 	}
 	/** transform from radians to angles */
-	public static double r2d(double a) { return Math.toDegrees(a);}
+	public static double r2d(double a) { 
+		return Math.toDegrees(a);
+	}
 	/** transform from angles to radians */
-	public static double d2r(double a) { return Math.toRadians(a);}
-	
-	
-	
-	public Point3D convertToGps() {	
-		
+	public static double d2r(double a) {
+		return Math.toRadians(a);
+	}
+	/** convert from cartesian point to gps point */
+	public Point3D convertToGps() {			
 		double r=Math.sqrt(Math.pow(_x, 2)+Math.pow(_y, 2)+Math.pow(_z, 2));
 		double lon =r2d(Math.atan2(Math.sqrt(Math.pow(_x, 2)+Math.pow(_y, 2)),_z));
 		double lat=r2d(Math.atan2(_y, _x));	
 		return new Point3D (r,lat,lon);
 	}
-	
-	public Point3D convertToCartesian() {
-		
+	/** convert from gps point to cartesian point */
+	public Point3D convertToCartesian() {	
 		double x_lat=_x*Math.sin(_z)*Math.cos(_y);
 		double y_lon=_x*Math.sin(_z)*Math.sin(_y);
 		double z=_x*Math.cos(_z);
@@ -259,11 +294,4 @@ public final static int DOWN = 6, UP = 7;
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////
-	
-	public static void main(String[] args) {
-		Point3D p=new Point3D(5,60,30);
-		System.out.println(p.convertToCartesian());
-		Point3D p2=new Point3D(3,4,5);
-		System.out.println(p2.convertToGps());
-	}
 }
