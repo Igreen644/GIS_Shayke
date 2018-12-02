@@ -78,6 +78,7 @@ public class KmlWriter {
 
 					Element coords = doc.createElement("coordinates");
 					coords.appendChild(doc.createTextNode(((GisElement) gis_element).getPoint().toFile()));
+					System.out.println(((GisElement) gis_element).getPoint().toFile());
 					point.appendChild(coords);
 
 					Element TimeStamp = doc.createElement("TimeStamp");
