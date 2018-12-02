@@ -78,13 +78,12 @@ public class KmlWriter {
 
 					Element coords = doc.createElement("coordinates");
 					coords.appendChild(doc.createTextNode(((GisElement) gis_element).getPoint().toFile()));
-					System.out.println(((GisElement) gis_element).getPoint().toFile());
 					point.appendChild(coords);
 
 					Element TimeStamp = doc.createElement("TimeStamp");
 					Element when = doc.createElement("when");
 					TimeStamp.appendChild(when);
-					String time = ((GisElement) gis_element).getfirstSeen() + "Z";
+					String time = ((GisElement) gis_element).getData().getUTC() + "Z";
 					when.appendChild(doc.createTextNode(time));
 					TimeStamp.appendChild(when);
 					placemark.appendChild(TimeStamp);
