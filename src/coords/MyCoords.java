@@ -107,9 +107,4 @@ public class MyCoords implements Coords_converter {
 	public boolean isValid_GPS_Point(Point3D p) {
 		return (p.x() >= (-180) && p.x() <= 180) && (p.y() >= (-90) && p.x() <= 90) && (p.z() >= (-450));
 	}
-	
-	public static void main(String[] args) {
-		
-	}
-
 }
