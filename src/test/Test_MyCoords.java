@@ -2,9 +2,8 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import coords.MyCoords;
@@ -19,12 +18,6 @@ class Test_MyCoords {
 	Point3D gps0;
 	Point3D gps1;
 	
-	@Before
-	public void setup(){
-		gps0=new Point3D(32.103315,35.209039,670);
-		gps1=new Point3D(32.106352,35.205225,650);
-		vec=new Point3D(48,210,450);
-	}
 	
 	@Test
 	void testAdd() { 
@@ -65,24 +58,29 @@ class Test_MyCoords {
 
 
 	}
-	/*
+	
 	@Test
 	public void testAzimuth_elevation_dist() {
+		gps0=new Point3D(32.103315,35.209039,670);
+		gps1=new Point3D(32.106352,35.205225,650);
+		vec=new Point3D(48,210,450);
 		double[] actual=coords.azimuth_elevation_dist(gps0, gps1);
 		double[] ans={313.23042032646896,
 		              92.32476351738879,
 		              493.0523318319326};
-		assertArrayEquals(ans, actual,"Azimuth_elevation_dist function is true");
+		assertArrayEquals(ans, actual);
 	}
 	
-	*/
+	
 	@Test
 	public void testIsValid_GPS_Point() {
 		boolean flag=true;
+		gps0=new Point3D(32.103315,35.209039,670);
 		if(!coords.isValid_GPS_Point(gps0))
 			flag=true;
 		assertTrue(flag);
 	}
+	
 	
 	
 }
